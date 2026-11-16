@@ -2,7 +2,6 @@
 ## Project Planning
 
 - [Project board](https://github.com/users/malakahmed09/projects/1)
-- [Wireframe](./wireframe.png)
 
 ### Sprint 1<img width="2219" height="1436" alt="WireFrame " src="https://github.com/user-attachments/assets/49449c6b-3c4d-4735-925e-06dee943cb4e" />
 
