@@ -1,0 +1,124 @@
+:root {
+    --color-background: #f2f2f2;
+
+    --color-white: white;
+
+    --color-black: black;
+
+    --color-gray: #555;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0; 
+    min-height: 100vh;
+    font-family:'Times New Roman', Times, serif;
+
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* Home Page */
+
+.homePage {
+    width:90%;
+    max-width: 500px;
+    padding: 35px;
+    margin:25px 0;
+
+    background-color: var(--color-background);
+    border: 3px solid var(--color-black);
+    border-radius: 25px;
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    font-size: 45px;
+    margin: 0 0 10px 10px; 
+}
+
+.description {
+    font-size: 18px;
+    color:red;
+    margin-bottom: 25px;
+}
+
+/* img */
+.game-img {
+    margin: 25px 0;
+}
+
+.game-img img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+}
+
+/* Player Boxes */
+
+.players {
+    display: flex;
+    gap : 15px; 
+    margin-bottom: 25px;
+}
+
+.playerBox {
+    padding:15px 10px;
+    border: 2px solid var(--color-black); 
+    border-radius: 12px;
+
+    flex: 1;
+
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    gap: 10px; 
+}
+/* Buttons */
+.home-buttons{
+    display: flex; 
+    flex-direction: column;
+    gap: 15px;
+}
+
+button{
+    padding: 15px;
+    font-size: 18px;
+
+    border: 2px solid var(--color-black);
+    border-radius: 10px;
+    background-color: var(--color-white);
+    cursor: pointer;
+}
+
+#start {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+/* instruction */
+
+#instructions {
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+
+    border: 2px solid var(--color-black);
+    border-radius: 15px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+#instructions::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
