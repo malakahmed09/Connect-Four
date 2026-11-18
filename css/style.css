@@ -150,4 +150,11 @@ button:hover {
     background-color: var(--color-white);
 }
 
+/* Players discs */
+.player1-disc {
+    background-color : red
+}
+.player2-disc {
+    background-color : blue
+}
     
