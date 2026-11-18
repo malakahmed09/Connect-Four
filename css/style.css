@@ -24,7 +24,7 @@ body {
 
 /* Home Page */
 
-.homePage {
+.homePage , #gamePage {
     width:90%;
     max-width: 500px;
     padding: 35px;
@@ -122,3 +122,32 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+
+/* Game Page */
+/* with the home Page */
+
+/* Game board */
+#board {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+
+    width: 100%;
+    max-width: 450px;
+    padding: 15px;
+    margin: 0 auto;
+
+    border: 3px solid var(--color-black);
+    border-radius: 25px;
+    background-color: var(--color-white)
+}
+
+/* board cells */
+.cell {
+    aspect-ratio: 1;
+    border: 3px solid var(--color-black);
+    border-radius: 50%;
+    background-color: var(--color-white);
+}
+
+    
