@@ -57,10 +57,14 @@ function switchPlayer() {
 // add drop method
 function dropDisc(column) {
 
+    if (gameOver === true){
+        return
+    }
+
     const cellEl = document.querySelectorAll('.cell')
 
     for (let row = 5; row >= 0; row--) {
-        
+
         // calculation of the index 
         let index = row * 7 + column
 
@@ -75,7 +79,10 @@ function dropDisc(column) {
 
             moveCount++
             checkWinner()
-            switchPlayer()
+
+            if (gameOver===false){
+                switchPlayer()
+            }
             break
         }
     }
@@ -110,7 +117,7 @@ function checkWinner() {
                     ||
 
                     // Diagonal right 
-                    (row < 3 && col < 4 &&
+                    (row < 3 && column < 4 &&
                         board[index + 8] === currentPlayer &&
                         board[index + 16] === currentPlayer &&
                         board[index + 24] === currentPlayer
@@ -119,7 +126,7 @@ function checkWinner() {
                     ||
 
                     // Diagonal left 
-                    (row < 3 && col > 2 &&
+                    (row < 3 && column > 2 &&
                         board[index + 6] === currentPlayer &&
                         board[index + 12] === currentPlayer &&
                         board[index + 18] === currentPlayer
