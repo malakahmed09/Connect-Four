@@ -21,6 +21,8 @@ const backButtonEl = document.querySelector('#back')
 
 const turnEl = document.querySelector('#turn')
 
+const resetButton = document.querySelector('#reset')
+
 
 /*-------------------------------- Functions --------------------------------*/
 // add the board game 
@@ -58,6 +60,7 @@ function dropDisc(column) {
     const cellEl = document.querySelectorAll('.cell')
 
     for (let row = 5; row >= 0; row--) {
+        
         // calculation of the index 
         let index = row * 7 + column
 
@@ -133,6 +136,33 @@ function checkWinner() {
     }
 }
 
+// check for tie 
+function checkTie() {
+    if (moveCount === 42 && gameOver === false){
+        gameOver = true
+        turnEl.textContent = 'It is a tie! '
+    }
+}
+
+
+//  reset the game 
+function resetGame(){
+    board = Array(42).fill(null)
+
+        const cellEl = document.querySelectorAll('.cell')
+
+        for (let i=0; i< cellEl.length; i++){
+            cellEl[i].classList.remove('player1-disc')
+            cellEl[i].classList.remove('player2-disc')
+
+        }
+
+    currentPlayer = 'Player 1'
+    moveCount = 0 
+    gameOver = false 
+
+    turnEl.textContent = `${currentPlayer}'s turn`
+}
 // calling the function 
 createBoard()
 
@@ -158,3 +188,5 @@ backButtonEl.addEventListener('click', () => {
     backButtonEl.hidden = true
 })
 
+resetButton.addEventListener('click', resetGame);
+resetGame();
