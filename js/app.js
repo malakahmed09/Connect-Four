@@ -4,6 +4,8 @@ let board = Array(42).fill(null)
 let currentPlayer = 'Player 1'
 let gameOver = false
 let moveCount = 0
+let player1Score = 0
+let player2Score = 0
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -22,6 +24,10 @@ const backButtonEl = document.querySelector('#back')
 const turnEl = document.querySelector('#turn')
 
 const resetButton = document.querySelector('#reset')
+
+const player1scoreEl = document.querySelector('#player1-score')
+const player2scoreEl = document.querySelector('#player2-score')
+
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -57,7 +63,7 @@ function switchPlayer() {
 // add drop method
 function dropDisc(column) {
 
-    if (gameOver === true){
+    if (gameOver === true) {
         return
     }
 
@@ -80,7 +86,7 @@ function dropDisc(column) {
             moveCount++
             checkWinner()
 
-            if (gameOver===false){
+            if (gameOver === false) {
                 switchPlayer()
             }
             break
@@ -131,11 +137,10 @@ function checkWinner() {
                         board[index + 12] === currentPlayer &&
                         board[index + 18] === currentPlayer
                     )
-                ) 
-                
-                {
+                ) {
                     gameOver = true
                     turnEl.textContent = `Player ${currentPlayer} wins!`;
+                    addScore()
                 }
             }
 
@@ -145,7 +150,7 @@ function checkWinner() {
 
 // check for tie 
 function checkTie() {
-    if (moveCount === 42 && gameOver === false){
+    if (moveCount === 42 && gameOver === false) {
         gameOver = true
         turnEl.textContent = 'It is a tie! '
     }
@@ -153,22 +158,34 @@ function checkTie() {
 
 
 //  reset the game 
-function resetGame(){
+function resetGame() {
     board = Array(42).fill(null)
 
-        const cellEl = document.querySelectorAll('.cell')
+    const cellEl = document.querySelectorAll('.cell')
 
-        for (let i=0; i< cellEl.length; i++){
-            cellEl[i].classList.remove('player1-disc')
-            cellEl[i].classList.remove('player2-disc')
+    for (let i = 0; i < cellEl.length; i++) {
+        cellEl[i].classList.remove('player1-disc')
+        cellEl[i].classList.remove('player2-disc')
 
-        }
+    }
 
     currentPlayer = 'Player 1'
-    moveCount = 0 
-    gameOver = false 
+    moveCount = 0
+    gameOver = false
 
     turnEl.textContent = `${currentPlayer}'s turn`
+}
+
+function addScore() {
+    if (currentPlayer === 'Player 1') {
+        player1Score++
+        player1scoreEl.textContent = player1Score
+    }
+
+    if (currentPlayer == 'Player 2') {
+        player2Score++
+        player2scoreEl.textContent = player2Score
+    }
 }
 // calling the function 
 createBoard()
