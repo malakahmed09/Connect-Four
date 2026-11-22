@@ -2,7 +2,7 @@
 
 let board = Array(42).fill(null)
 let currentPlayer = 'Player 1'
-let gameOver = false 
+let gameOver = false
 let moveCount = 0
 
 
@@ -25,14 +25,14 @@ const turnEl = document.querySelector('#turn')
 /*-------------------------------- Functions --------------------------------*/
 // add the board game 
 
-function createBoard(){
-    for (let i=0; i<42; i++){
+function createBoard() {
+    for (let i = 0; i < 42; i++) {
         const cell = document.createElement('div')
         cell.classList.add('cell')
 
-        cell.addEventListener('click', ()=> {
+        cell.addEventListener('click', () => {
             // drop in the selected column
-            dropDisc(i%7)
+            dropDisc(i % 7)
         })
 
         boardEl.appendChild(cell)
@@ -53,32 +53,88 @@ function switchPlayer() {
 }
 
 // add drop method
-function dropDisc(column){
+function dropDisc(column) {
 
     const cellEl = document.querySelectorAll('.cell')
 
-    for (let row=5; row>=0; row--){
+    for (let row = 5; row >= 0; row--) {
         // calculation of the index 
         let index = row * 7 + column
 
-        if (board[index]=== null){
+        if (board[index] === null) {
             board[index] = currentPlayer
 
             if (currentPlayer === 'Player 1') {
                 cellEl[index].classList.add('player1-disc')
-                } else {
-                    cellEl[index].classList.add('player2-disc')
-                }
+            } else {
+                cellEl[index].classList.add('player2-disc')
+            }
 
-                moveCount++
-                switchPlayer()
-                break
+            moveCount++
+            checkWinner()
+            switchPlayer()
+            break
         }
     }
-    }
+}
 
-    // calling the function 
-    createBoard()
+// check winner function 
+function checkWinner() {
+    for (let row = 0; row < 6; row++) {
+        for (let column = 0; column < 7; column++) {
+
+            let index = row * 7 + column
+
+            if (board[index] === currentPlayer) {
+
+                if (
+
+                    // Horizontal 
+                    (column < 4 &&
+                        board[index + 1] === currentPlayer &&
+                        board[index + 2] === currentPlayer &&
+                        board[index + 3] === currentPlayer)
+
+                    ||
+
+                    // Vertical 
+                    (row < 3 &&
+                        board[index + 7] === currentPlayer &&
+                        board[index + 14] === currentPlayer &&
+                        board[index + 21] === currentPlayer
+                    )
+
+                    ||
+
+                    // Diagonal right 
+                    (row < 3 && col < 4 &&
+                        board[index + 8] === currentPlayer &&
+                        board[index + 16] === currentPlayer &&
+                        board[index + 24] === currentPlayer
+                    )
+
+                    ||
+
+                    // Diagonal left 
+                    (row < 3 && col > 2 &&
+                        board[index + 6] === currentPlayer &&
+                        board[index + 12] === currentPlayer &&
+                        board[index + 18] === currentPlayer
+                    )
+                ) 
+                
+                {
+                    gameOver = true
+                    turnEl.textContent = `Player ${currentPlayer} wins!`;
+                }
+            }
+
+        }
+    }
+}
+
+// calling the function 
+createBoard()
 
 /*----------------------------- Event Listeners -----------------------------*/
 
