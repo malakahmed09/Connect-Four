@@ -42,10 +42,59 @@
         <!-- Buttons -->
         <div class="home-buttons">
             <button id="start">Start</button>
-            <button id="open-instructions">How to play</button>
+            <button class="open-instructions">How to play</button>
         </div>
 
-        <!-- Instruction Button -->
+    </main>
+
+    <!-- Game Page -->
+    <section id="gamePage" hidden>
+        <h1>Connect Four Game</h1>
+        <p id="turn">Player 1 turn</p>
+
+        <div id="board"></div>
+
+        <!-- gamePage-button -->
+         <div class="gamePage-buttons" > 
+             <button id="play-again-game">Play Again</button>
+             <button id="back"> Back To Home</button>
+             <button id="reset">Reset</button>
+             <button class="open-instructions">How to play</button>
+
+         </div>
+    
+        <!-- score -->
+        <div class="score-board">
+            <!-- player 1 score  -->
+            <div class="score">
+                <h3 id="player1-score-name">Player 1</h3>
+                <p id="player1-score">0</p>
+            </div>
+
+            <!-- player 2 score -->
+            <div class="score">
+                <h3 id="player2-score-name">Player 2</h3>
+                <p id="player2-score">0</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- winner celebration -->
+     <dialog id="winner-modal">
+        <h2 id="winner-message"> Congratulations! </h2>
+        <h2 id="winner-name"></h2>
+        <p> Great game! </p>
+
+        <div class= "winner-buttons" >
+           <button id = "play-again">Play Again</button>
+           <button id = "reset-game">Reset</button>
+           <button id = "go-home">Go to Home</button>
+        </div>
+
+     </dialog>
+
+     <!-- Instruction Button -->
         <dialog id="instructions">
 
             <h2> How to play </h2>
@@ -56,31 +105,6 @@
             <button id="close-instructions"> X </button>
 
         </dialog>
-    </main>
-
-    <!-- Game Page -->
-    <section id="gamePage" hidden>
-        <h1>Connect Four Game</h1>
-        <p id="turn">Player 1 turn</p>
-
-        <div id="board"></div>
-    </section>
-
-    <button id="back" hidden> Back To Home</button>
-    <button id="reset">Reset</button>
-
-    <!-- score -->
-    <div class="score-board">
-        <div class="score">
-            <h3 id="player1-score-name">Player 1</h3>
-            <p id="player1-score">0</p>
-        </div>
-        <div class="score">
-            <h3 id="player2-score-name">Player 2</h3>
-            <p id="player2-score">0</p>
-        </div>
-    </div>
-
 </body>
 
 </html>

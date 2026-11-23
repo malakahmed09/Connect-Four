@@ -14,7 +14,7 @@ let player2Name = 'Player 2'
 /*------------------------ Cached Element References ------------------------*/
 
 const instructionsModalEl = document.querySelector('#instructions')
-const openInstructionsButtonEl = document.querySelector('#open-instructions')
+const openInstructionsButtonEls = document.querySelectorAll('.open-instructions')
 const closeInstructionsButtonEl = document.querySelector('#close-instructions')
 const boardEl = document.querySelector('#board')
 
@@ -27,6 +27,8 @@ const backButtonEl = document.querySelector('#back')
 const turnEl = document.querySelector('#turn')
 
 const resetButton = document.querySelector('#reset')
+const playAgainGameButtonEl = document.querySelector('#play-again-game')
+
 
 const player1scoreEl = document.querySelector('#player1-score')
 const player2scoreEl = document.querySelector('#player2-score')
@@ -37,6 +39,13 @@ const player2ScoreNameEl = document.querySelector('#player2-score-name')
 const player1NameInputEl = document.querySelector('#player1-name')
 const player2NameInputEl = document.querySelector('#player2-name')
 
+const winnerModalEl = document.querySelector('#winner-modal')
+const winnerMessageEl = document.querySelector('#winner-message')
+const winnerNameEl = document.querySelector('#winner-name')
+
+const playAgainButtonEl = document.querySelector('#play-again')
+const resetGameButtonEl = document.querySelector('#reset-game')
+const goHomeButtonEl = document.querySelector('#go-home')
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -151,6 +160,9 @@ function checkWinner() {
                     gameOver = true
                     turnEl.textContent = `${getPlayerName()} wins!`;
                     addScore()
+                    winnerNameEl.textContent = getPlayerName()
+                    winnerModalEl.showModal()
+                    return
                 }
             }
 
@@ -183,6 +195,7 @@ function resetGame() {
     moveCount = 0
     gameOver = false
 
+    winnerModalEl.close()
     turnEl.textContent = `${getPlayerName()}'s turn`
 }
 
@@ -205,13 +218,16 @@ function getPlayerName(){
         return player2Name
     }
 }
+
 // calling the function 
 createBoard()
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-openInstructionsButtonEl.addEventListener('click', () => {
+openInstructionsButtonEls.forEach((button) => {
+    button.addEventListener('click', () => {
     instructionsModalEl.showModal()
+}) 
 })
 
 closeInstructionsButtonEl.addEventListener('click', () => {
@@ -230,14 +246,29 @@ startButtonEl.addEventListener('click', () => {
 
     homePageEl.hidden = true
     gamePageEl.hidden = false
-    backButtonEl.hidden = false
 })
 
 backButtonEl.addEventListener('click', () => {
     homePageEl.hidden = false
     gamePageEl.hidden = true
-    backButtonEl.hidden = true
 })
 
-resetButton.addEventListener('click', resetGame);
-resetGame();
+resetButton.addEventListener('click', () => {
+    player1Score = 0
+    player2Score = 0
+    player1scoreEl.textContent = 0
+    player2scoreEl.textContent = 0
+    resetGame()
+})
+
+playAgainGameButtonEl.addEventListener('click', resetGame)
+playAgainButtonEl.addEventListener('click', resetGame)
+
+goHomeButtonEl.addEventListener('click', () => {
+    winnerModalEl.close()
+    backButtonEl.click()
+})
+
+resetGameButtonEl.addEventListener('click', () => {
+    resetButton.click()
+})
