@@ -6,6 +6,9 @@ let gameOver = false
 let moveCount = 0
 let player1Score = 0
 let player2Score = 0
+let player1Name = 'Player 1'
+let player2Name = 'Player 2'
+
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -27,6 +30,12 @@ const resetButton = document.querySelector('#reset')
 
 const player1scoreEl = document.querySelector('#player1-score')
 const player2scoreEl = document.querySelector('#player2-score')
+
+const player1ScoreNameEl = document.querySelector('#player1-score-name')
+const player2ScoreNameEl = document.querySelector('#player2-score-name')
+
+const player1NameInputEl = document.querySelector('#player1-name')
+const player2NameInputEl = document.querySelector('#player2-name')
 
 
 
@@ -56,7 +65,7 @@ function switchPlayer() {
             currentPlayer = 'Player 1'
         }
 
-        turnEl.textContent = `${currentPlayer}'s turn`
+        turnEl.textContent = `${getPlayerName()}'s turn`
     }
 }
 
@@ -85,6 +94,7 @@ function dropDisc(column) {
 
             moveCount++
             checkWinner()
+            checkTie()
 
             if (gameOver === false) {
                 switchPlayer()
@@ -139,7 +149,7 @@ function checkWinner() {
                     )
                 ) {
                     gameOver = true
-                    turnEl.textContent = `Player ${currentPlayer} wins!`;
+                    turnEl.textContent = `${getPlayerName()} wins!`;
                     addScore()
                 }
             }
@@ -173,7 +183,7 @@ function resetGame() {
     moveCount = 0
     gameOver = false
 
-    turnEl.textContent = `${currentPlayer}'s turn`
+    turnEl.textContent = `${getPlayerName()}'s turn`
 }
 
 function addScore() {
@@ -185,6 +195,14 @@ function addScore() {
     if (currentPlayer == 'Player 2') {
         player2Score++
         player2scoreEl.textContent = player2Score
+    }
+}
+
+function getPlayerName(){
+    if (currentPlayer === 'Player 1'){
+        return player1Name
+    } else {
+        return player2Name
     }
 }
 // calling the function 
@@ -201,6 +219,15 @@ closeInstructionsButtonEl.addEventListener('click', () => {
 })
 
 startButtonEl.addEventListener('click', () => {
+
+    player1Name = player1NameInputEl.value.trim() || 'Player 1'
+    player2Name = player2NameInputEl.value.trim() || 'Player 2'
+
+    player1ScoreNameEl.textContent = player1Name
+    player2ScoreNameEl.textContent = player2Name
+
+    turnEl.textContent = `${getPlayerName()}'s turn`
+
     homePageEl.hidden = true
     gamePageEl.hidden = false
     backButtonEl.hidden = false
