@@ -9,7 +9,8 @@ let player2Score = 0
 let player1Name = 'Player 1'
 let player2Name = 'Player 2'
 
-
+let startTime = 0
+let timerInterval = null
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -46,6 +47,9 @@ const winnerNameEl = document.querySelector('#winner-name')
 const playAgainButtonEl = document.querySelector('#play-again')
 const resetGameButtonEl = document.querySelector('#reset-game')
 const goHomeButtonEl = document.querySelector('#go-home')
+
+const timerEl = document.querySelector('#timer')
+const winnerTimeEl = document.querySelector('#winner-time')
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -160,7 +164,9 @@ function checkWinner() {
                     gameOver = true
                     turnEl.textContent = `${getPlayerName()} wins!`;
                     addScore()
+                    stopTimer()
                     winnerNameEl.textContent = getPlayerName()
+                    winnerTimeEl.textContent = `Game completed in ${timerEl.textContent}`
                     winnerModalEl.showModal()
                     return
                 }
@@ -197,6 +203,7 @@ function resetGame() {
 
     winnerModalEl.close()
     turnEl.textContent = `${getPlayerName()}'s turn`
+    startTimer()
 }
 
 function addScore() {
@@ -217,6 +224,29 @@ function getPlayerName(){
     } else {
         return player2Name
     }
+}
+
+//timer 
+function formatTime(ms){
+    const totalSeconds = Math.floor(ms / 1000)
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0')
+    const seconds = String(totalSeconds % 60).padStart(2, '0')
+    return `Time: ${minutes}:${seconds}`
+}
+
+function startTimer () {
+    clearInterval(timerInterval)
+    startTime = Date.now()
+    timerEl.textContent = 'Time: 00:00'
+
+    timerInterval = setInterval(() => {
+        timerEl.textContent = formatTime(Date.now() - startTime)
+    }, 1000)
+
+}
+
+function stopTimer () {
+    clearInterval(timerInterval)
 }
 
 // calling the function 
@@ -243,6 +273,7 @@ startButtonEl.addEventListener('click', () => {
     player2ScoreNameEl.textContent = player2Name
 
     turnEl.textContent = `${getPlayerName()}'s turn`
+    startTimer()
 
     homePageEl.hidden = true
     gamePageEl.hidden = false
