@@ -31,6 +31,8 @@ Goal: connect four discs of the same color horizontally, vertically, or diagonal
 
 ### Screenshot
 
+<img width="938" height="700" alt="connect four" src="https://github.com/user-attachments/assets/ff8189b9-4764-495a-b565-38ed310df756" />
+<img width="1078" height="766" alt="connect 4 game" src="https://github.com/user-attachments/assets/f354d956-4f8e-4972-9e5c-17d8b345d21b" />
 
 ### Future Improvements
 
