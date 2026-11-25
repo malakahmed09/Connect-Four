@@ -126,54 +126,81 @@ function checkWinner() {
 
             if (board[index] === currentPlayer) {
 
-                if (
+                // highlight the winning cells 
+                let winningCells = []
 
-                    // Horizontal 
-                    (column < 4 &&
-                        board[index + 1] === currentPlayer &&
-                        board[index + 2] === currentPlayer &&
-                        board[index + 3] === currentPlayer)
+                // Horizontal
+                if (column < 4 &&
+                    board[index + 1] === currentPlayer &&
+                    board[index + 2] === currentPlayer &&
+                    board[index + 3] === currentPlayer) {
 
-                    ||
+                    winningCells = [index, index + 1, index + 2, index + 3]
+                }
 
-                    // Vertical 
+                // Vertical  
+                else if
+
                     (row < 3 &&
-                        board[index + 7] === currentPlayer &&
-                        board[index + 14] === currentPlayer &&
-                        board[index + 21] === currentPlayer
-                    )
-
-                    ||
-
-                    // Diagonal right 
-                    (row < 3 && column < 4 &&
-                        board[index + 8] === currentPlayer &&
-                        board[index + 16] === currentPlayer &&
-                        board[index + 24] === currentPlayer
-                    )
-
-                    ||
-
-                    // Diagonal left 
-                    (row < 3 && column > 2 &&
-                        board[index + 6] === currentPlayer &&
-                        board[index + 12] === currentPlayer &&
-                        board[index + 18] === currentPlayer
-                    )
+                    board[index + 7] === currentPlayer &&
+                    board[index + 14] === currentPlayer &&
+                    board[index + 21] === currentPlayer
                 ) {
-                    gameOver = true
-                    turnEl.textContent = `${getPlayerName()} wins!`;
-                    addScore()
-                    stopTimer()
-                    winnerNameEl.textContent = getPlayerName()
-                    winnerTimeEl.textContent = `Game completed in ${timerEl.textContent}`
-                    winnerModalEl.showModal()
+                    winningCells = [index, index + 7, index + 14, index + 21]
+                }
+
+                // Diagonal right 
+                else if
+
+                    (row < 3 && column < 4 &&
+                    board[index + 8] === currentPlayer &&
+                    board[index + 16] === currentPlayer &&
+                    board[index + 24] === currentPlayer
+                ) {
+                    winningCells = [index, index + 8, index + 16, index + 24]
+                }
+
+                // Diagonal left 
+                else if
+                    (row < 3 && column > 2 &&
+                    board[index + 6] === currentPlayer &&
+                    board[index + 12] === currentPlayer &&
+                    board[index + 18] === currentPlayer
+                ) {
+                    winningCells = [index, index + 6, index + 12, index + 18]
+                }
+
+                if (winningCells.length > 0) {
+                    finishGame(winningCells)
                     return
                 }
             }
 
         }
     }
+}
+
+
+// finish the game
+function finishGame(winningCells) {
+
+    const cellEl = document.querySelectorAll('.cell')
+
+    // Highlight the winning discs
+    for (let i = 0; i < winningCells.length; i++) {
+        cellEl[winningCells[i]].classList.add('winning-disc')
+    }
+    // if there is a winner then : 
+
+    gameOver = true
+    turnEl.textContent = `${getPlayerName()} wins!`
+    addScore()
+    stopTimer()
+    winnerNameEl.textContent = getPlayerName()
+    winnerTimeEl.textContent = `Game completed in ${timerEl.textContent}`
+
+    setTimeout (() => {
+         winnerModalEl.showModal() }, 1800)
 }
 
 // check for tie 
@@ -194,7 +221,8 @@ function resetGame() {
     for (let i = 0; i < cellEl.length; i++) {
         cellEl[i].classList.remove('player1-disc')
         cellEl[i].classList.remove('player2-disc')
-
+        // remove the highlights 
+        cellEl[i].classList.remove('winning-disc')
     }
 
     currentPlayer = 'Player 1'
@@ -218,8 +246,8 @@ function addScore() {
     }
 }
 
-function getPlayerName(){
-    if (currentPlayer === 'Player 1'){
+function getPlayerName() {
+    if (currentPlayer === 'Player 1') {
         return player1Name
     } else {
         return player2Name
@@ -227,14 +255,14 @@ function getPlayerName(){
 }
 
 //timer 
-function formatTime(ms){
+function formatTime(ms) {
     const totalSeconds = Math.floor(ms / 1000)
     const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0')
     const seconds = String(totalSeconds % 60).padStart(2, '0')
     return `Time: ${minutes}:${seconds}`
 }
 
-function startTimer () {
+function startTimer() {
     clearInterval(timerInterval)
     startTime = Date.now()
     timerEl.textContent = 'Time: 00:00'
@@ -245,7 +273,7 @@ function startTimer () {
 
 }
 
-function stopTimer () {
+function stopTimer() {
     clearInterval(timerInterval)
 }
 
@@ -256,8 +284,8 @@ createBoard()
 
 openInstructionsButtonEls.forEach((button) => {
     button.addEventListener('click', () => {
-    instructionsModalEl.showModal()
-}) 
+        instructionsModalEl.showModal()
+    })
 })
 
 closeInstructionsButtonEl.addEventListener('click', () => {
@@ -272,14 +300,14 @@ startButtonEl.addEventListener('click', () => {
     player1ScoreNameEl.textContent = player1Name
     player2ScoreNameEl.textContent = player2Name
 
-    turnEl.textContent = `${getPlayerName()}'s turn`
-    startTimer()
+    resetGame()
 
     homePageEl.hidden = true
     gamePageEl.hidden = false
 })
 
 backButtonEl.addEventListener('click', () => {
+    stopTimer()
     homePageEl.hidden = false
     gamePageEl.hidden = true
 })
