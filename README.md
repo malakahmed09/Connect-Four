@@ -11,6 +11,36 @@ Connect Four is a fun two-player strategy game where players take turns dropping
 
 Goal: connect four discs of the same color horizontally, vertically, or diagonally before your opponent.
 
+### Getting Started
+
+1. Open the game using the deployed link.
+2. Enter the names of both players.
+3. Click the Start button.
+4. Take turns dropping discs into the columns.
+5. The first player to connect four discs wins!
+
+### Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+- Git and GitHub
+
+### Play the Game
+
+
+
+### Screenshot
+
+
+### Future Improvements
+
+- Add sound effects.
+- Improve the game design.
+- Add more game modes.
+
+### Project Timeline
+
 Start: 16 Nov
 End: 24 Nov
 

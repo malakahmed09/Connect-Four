@@ -1,14 +1,20 @@
 /*---------------------------- Variables (state) ----------------------------*/
 
+// Game variables
 let board = Array(42).fill(null)
 let currentPlayer = 'Player 1'
 let gameOver = false
 let moveCount = 0
+
+// Player scores
 let player1Score = 0
 let player2Score = 0
+
+// Player names
 let player1Name = 'Player 1'
 let player2Name = 'Player 2'
 
+// Timer variables
 let startTime = 0
 let timerInterval = null
 
@@ -41,7 +47,6 @@ const player1NameInputEl = document.querySelector('#player1-name')
 const player2NameInputEl = document.querySelector('#player2-name')
 
 const winnerModalEl = document.querySelector('#winner-modal')
-const winnerMessageEl = document.querySelector('#winner-message')
 const winnerNameEl = document.querySelector('#winner-name')
 
 const playAgainButtonEl = document.querySelector('#play-again')
@@ -53,9 +58,10 @@ const winnerTimeEl = document.querySelector('#winner-time')
 
 
 /*-------------------------------- Functions --------------------------------*/
-// add the board game 
 
+// create the game board with 42 cells
 function createBoard() {
+    // create 42 cells for the board
     for (let i = 0; i < 42; i++) {
         const cell = document.createElement('div')
         cell.classList.add('cell')
@@ -69,7 +75,7 @@ function createBoard() {
     }
 }
 
-// add switch player 
+// switch player 
 function switchPlayer() {
     if (gameOver === false) {
         if (currentPlayer === 'Player 1') {
@@ -82,7 +88,7 @@ function switchPlayer() {
     }
 }
 
-// add drop method
+// drop a disc into the selected column
 function dropDisc(column) {
 
     if (gameOver === true) {
@@ -170,6 +176,7 @@ function checkWinner() {
                     winningCells = [index, index + 6, index + 12, index + 18]
                 }
 
+                // finish the game if four connected discs are found
                 if (winningCells.length > 0) {
                     finishGame(winningCells)
                     return
@@ -199,8 +206,10 @@ function finishGame(winningCells) {
     winnerNameEl.textContent = getPlayerName()
     winnerTimeEl.textContent = `Game completed in ${timerEl.textContent}`
 
+    //show the winner modal after 1.8 seconds
     setTimeout (() => {
-         winnerModalEl.showModal() }, 1800)
+         winnerModalEl.showModal() 
+        }, 1800)
 }
 
 // check for tie 
@@ -208,16 +217,18 @@ function checkTie() {
     if (moveCount === 42 && gameOver === false) {
         gameOver = true
         turnEl.textContent = 'It is a tie! '
+        stopTimer()
     }
 }
 
 
-//  reset the game 
+// reset the board and start a new round
 function resetGame() {
     board = Array(42).fill(null)
 
     const cellEl = document.querySelectorAll('.cell')
 
+    // remove all discs and winning highlights
     for (let i = 0; i < cellEl.length; i++) {
         cellEl[i].classList.remove('player1-disc')
         cellEl[i].classList.remove('player2-disc')
@@ -240,7 +251,7 @@ function addScore() {
         player1scoreEl.textContent = player1Score
     }
 
-    if (currentPlayer == 'Player 2') {
+    if (currentPlayer === 'Player 2') {
         player2Score++
         player2scoreEl.textContent = player2Score
     }
