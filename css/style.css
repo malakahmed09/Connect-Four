@@ -1,160 +1,310 @@
+
+/* Colors */
 :root {
-    --color-background: #f2f2f2;
-
-    --color-white: white;
-
-    --color-black: black;
-
-    --color-gray: #555;
+    --navy: #172b4d;
+    --white: #ffffff;
+    --green: #27b36a;
+    --dark-green: #208e55;
+    --pink: #ff786b;
+    --yellow: #ffc857;
+    --gray: #718096;
 }
 
+/* General Style */
 * {
     box-sizing: border-box;
 }
 
 body {
-    margin: 0; 
-    min-height: 100vh;
-    font-family:'Times New Roman', Times, serif;
-
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-}
-
-/* Home Page */
-
-.homePage , #gamePage {
-    width:90%;
-    max-width: 500px;
-    padding: 35px;
-    margin:25px 0;
-
-    background-color: var(--color-background);
-    border: 3px solid var(--color-black);
-    border-radius: 25px;
+    margin: 0;
+    padding: 20px;
+    font-family: "Changa One", sans-serif;;
+    background-color: var(--navy);
+    color: var(--navy);
     text-align: center;
 }
 
-/* Title */
-h1 {
-    font-size: 45px;
-    margin: 0 0 10px 10px; 
+/* Home Page */
+.homePage {
+    max-width: 850px;
+    width: 100%;
+    margin: 25px auto;
+    padding: 35px;
+    background-color: var(--white);
+    border-radius: 22px;
+}
+
+.homePage h1 {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+    font-size: 48px;
+    margin: 5px 0;
+    color: var(--navy);
 }
 
 .description {
+    grid-column: 1;
+    grid-row: 2;
+    text-align: left;
     font-size: 18px;
-    color:red;
-    margin-bottom: 25px;
+    color: var(--gray);
+    margin: 0;
 }
 
-/* img */
 .game-img {
-    margin: 25px 0;
+    grid-column: 2;
+    grid-row: 1 / 3;
 }
 
 .game-img img {
     width: 100%;
-    max-width: 280px;
-    height: auto;
+    max-width: 310px;
+    height: 220px;
+    object-fit: contain;
 }
 
-/* Player Boxes */
-
+/* Players */
 .players {
     display: flex;
-    gap : 15px; 
-    margin-bottom: 25px;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px auto;
 }
 
 .playerBox {
-    padding:15px 10px;
-    border: 2px solid var(--color-black); 
-    border-radius: 12px;
-
-    flex: 1;
-
-    display: flex; 
-    justify-content: center;
-    align-items: center; 
-    gap: 10px; 
-}
-/* Buttons */
-.home-buttons{
-    display: flex; 
-    flex-direction: column;
-    gap: 15px;
-}
-
-button{
+    width: 50%;
     padding: 15px;
-    font-size: 18px;
-
-    border: 2px solid var(--color-black);
-    border-radius: 10px;
-    background-color: var(--color-white);
-    cursor: pointer;
+    background-color: #f2f5fa;
+    border-radius: 12px;
 }
 
-#start {
-    background-color: var(--color-black);
-    color: var(--color-white);
+.playerBox:first-child {
+    border-bottom: 4px solid var(--pink);
+}
+
+.playerBox:last-child {
+    border-bottom: 4px solid var(--yellow);
+}
+
+.playerBox::before {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--navy);
+}
+
+.playerBox:first-child::before {
+    content: "PLAYER 1";
+    color: var(--pink);
+}
+
+.playerBox:last-child::before {
+    content: "PLAYER 2";
+    color: #d69a20;
+}
+
+.playerBox input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dce3ed;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Buttons */
+button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 9px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: var(--navy);
+    color: var(--white);
 }
 
 button:hover {
-    opacity: 0.7;
+    background-color: var(--green);
 }
 
-/* instruction */
-
-#instructions {
-    width: 90%;
-    max-width: 400px;
-    padding: 30px;
-
-    border: 2px solid var(--color-black);
-    border-radius: 15px;
-    text-align: center;
-    line-height: 1.6;
+.home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
 }
 
-#instructions::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+#start {
+    background-color: var(--green);
+    padding: 14px 45px;
 }
 
+#start:hover {
+    background-color: var(--dark-green);
+}
+
+.home-buttons .open-instructions {
+    background-color: var(--navy);
+}
 
 /* Game Page */
-/* with the home Page */
+#gamePage {
+    max-width: 1000px;
+    width: 100%;
+    margin: 5px auto;
+    padding: 22px;
+    background-color: var(--white);
+    border-radius: 20px;
+}
 
-/* Game board */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.game-title h1 {
+    font-size: 38px;
+    color: var(--navy);
+    margin: 5px;
+}
+
+#turn {
+    font-size: 18px;
+    margin: 6px;
+}
+
+#timer {
+    color: var(--gray);
+    font-size: 16px;
+    margin: 5px;
+}
+
+/* Scores */
+.score {
+    width: 175px;
+    padding: 13px;
+    background-color: #f2f5fa;
+    border-radius: 13px;
+}
+
+.score h3 {
+    font-size: 17px;
+    margin: 5px;
+}
+
+.score p {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+#player1-score-name {
+    color: var(--pink);
+}
+
+#player2-score-name {
+    color: #d69a20;
+}
+
+/* Game Board */
 #board {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 13px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 8px;
-
-    width: 100%;
-    max-width: 450px;
-    padding: 15px;
-    margin: 0 auto;
-
-    border: 3px solid var(--color-black);
-    border-radius: 25px;
-    background-color: var(--color-white)
+    background-color: var(--navy);
+    border-radius: 14px;
 }
 
-/* board cells */
 .cell {
+    width: 100%;
     aspect-ratio: 1;
-    border: 3px solid var(--color-black);
+    background-color: var(--white);
     border-radius: 50%;
-    background-color: var(--color-white);
+    cursor: pointer;
 }
 
-/* Players discs */
 .player1-disc {
-    background-color : red
+    background-color: var(--pink);
 }
+
 .player2-disc {
-    background-color : blue
+    background-color: var(--yellow);
 }
-    
+
+/* Game Buttons */
+.gamePage-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+/* Winner Modal */
+#winner-modal {
+    width: 90%;
+    max-width: 420px;
+    padding: 0;
+    border: none;
+    border-radius: 18px;
+    text-align: center;
+}
+
+#winner-modal::backdrop {
+    background-color: rgba(23, 43, 77, 0.7);
+}
+
+.winner-content {
+    padding: 22px;
+}
+
+.winner-icon {
+    font-size: 42px;
+}
+
+#winner-message {
+    font-size: 25px;
+}
+
+#winner-name {
+    color: var(--green);
+    font-size: 30px;
+}
+
+.winner-time-box {
+    background-color: #e5f5f2;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 12px 0;
+}
+
+.winner-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Instructions */
+#instructions {
+    max-width: 420px;
+    width: 90%;
+    padding: 22px;
+    border: none;
+    border-radius: 16px;
+    text-align: center;
+}
+
+#instructions::backdrop {
+    background-color: rgba(23, 43, 77, 0.7);
+}

@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect Four Game</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
+
     <!-- connect the js and css files -->
     <link rel="stylesheet" href="./css/style.css">
     <script defer src="./js/app.js"></script>
@@ -49,65 +53,77 @@
 
     <!-- Game Page -->
     <section id="gamePage" hidden>
-        <h1>Connect Four Game</h1>
-        <p id="turn">Player 1 turn</p>
-        <p id="timer">Time: 00:00</p>
 
+        <!-- Game Header -->
+        <header class="game-header">
 
-        <div id="board"></div>
-
-        <!-- gamePage-button -->
-         <div class="gamePage-buttons" > 
-             <button id="play-again-game">Play Again</button>
-             <button id="reset">Reset</button>
-             <button id="back"> Back To Home</button>
-             <button class="open-instructions">How to play</button>
-
-         </div>
-    
-        <!-- score -->
-        <div class="score-board">
-            <!-- player 1 score  -->
+            <!-- Player 1 -->
             <div class="score">
                 <h3 id="player1-score-name">Player 1</h3>
                 <p id="player1-score">0</p>
             </div>
 
-            <!-- player 2 score -->
+            <!-- Game Title -->
+            <div class="game-title">
+                <h1>Connect Four</h1>
+                <p id="turn">Player 1 turn</p>
+                <p id="timer">Time: 00:00</p>
+            </div>
+
+            <!-- Player 2 -->
             <div class="score">
                 <h3 id="player2-score-name">Player 2</h3>
                 <p id="player2-score">0</p>
             </div>
+        </header>
 
+        <!-- Game Board -->
+        <div id="board"></div>
+
+        <!-- Game Buttons -->
+        <div class="gamePage-buttons">
+            <button id="play-again-game">Play Again</button>
+            <button id="reset">Reset</button>
+            <button id="back">Back To Home</button>
+            <button class="open-instructions">How to Play</button>
         </div>
     </section>
 
-    <!-- winner celebration -->
-     <dialog id="winner-modal">
-        <h2 id="winner-message"> Congratulations! </h2>
-        <h2 id="winner-name"></h2>
-        <p id="winner-time"></p>
-        <p> Great game! </p>
+    <!-- Winner Celebration -->
+    <dialog id="winner-modal">
+        <div class="winner-content">
+            <div class="winner-icon">🏆</div>
 
-        <div class= "winner-buttons" >
-           <button id = "play-again">Play Again</button>
-           <button id = "reset-game">Reset</button>
-           <button id = "go-home">Go to Home</button>
+            <h2 id="winner-message">Congratulations!</h2>
+            <h1 id="winner-name"></h1>
+
+            <p>What a great game!</p>
+
+            <div class="winner-time-box">
+                <h2 id="winner-time"></h2>
+            </div>
+
+            <div class="winner-buttons">
+                <button id="play-again">Play Again</button>
+                <button id="reset-game">Reset</button>
+                <button id="go-home">Go to Home</button>
+            </div>
+
         </div>
 
-     </dialog>
+    </dialog>
 
-     <!-- Instruction Button -->
-        <dialog id="instructions">
+    <!-- Instruction Button -->
+    <dialog id="instructions">
 
-            <h2> How to play </h2>
-            <p> Two players take turns dropping discs into the grid. </p>
-            <p> The first player to connect four discs horizontally, vertically, or diagonally wins!</p>
-            <p> If the grid is full and no one wins, it's a draw. </p>
+        <h2> How to play </h2>
+        <p> Two players take turns dropping discs into the grid. </p>
+        <p> The first player to connect four discs horizontally, vertically, or diagonally wins!</p>
+        <p> If the grid is full and no one wins, it's a draw. </p>
 
-            <button id="close-instructions"> X </button>
+        <button id="close-instructions"> X </button>
 
-        </dialog>
+    </dialog>
 </body>
 
 </html>
