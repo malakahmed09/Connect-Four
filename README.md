@@ -27,8 +27,7 @@ Goal: connect four discs of the same color horizontally, vertically, or diagonal
 - Git and GitHub
 
 ### Play the Game
-
-
+- [Play the game](https://malakahmed09.github.io/Connect-Four/)
 
 ### Screenshot
 
